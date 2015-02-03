@@ -15,58 +15,61 @@
     </head>
 
     <body role="document">  
-        <!-- Fixed navbar -->
-        <!-- navbar-default -->
-        <div id="menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Batchrefine  Transformer Factory UI</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                    </ul>
-                    <div style="float: right;">
-                        <img src="images/fusepool.png" alt="Fusepool P3" height="45">
-                    </div>
-                </div><!--/.nav-collapse -->
-            </div>
+
+        <div class="container theme-showcase">
+            <a href="http://p3.fusepool.eu" target="_blank">
+                <img src="images/fusepool.png" title="Fusepool P3" alt="Fusepool P3" id="logo" />
+            </a>
         </div>
-        <div id="container" class="container theme-showcase" role="main">	 
+        <div id="main" class="container theme-showcase well">
             <div class="form-horizontal" role="form">
             <div class="form-group">
                 <label for="refineJson" class="col-sm-2 control-label">
                     URI of the Refine JSON: 
                 </label>
-                <div class="col-sm-10"><input type="text" name="refineJson" id="refineJson" size="80" value="http://" /><br/>
-                    <span style="color: gainsboro">(e.g. https://raw.githubusercontent.com/fusepoolP3/batchrefine/master/engines/engines-core/src/test/resources/transforms/osterie-rdfize.json)</span></div>
+                <div class="col-sm-10"><input type="text" class="form-control" name="refineJson" id="refineJson" size="80" value="http://" /><br/>
+                    <span style="color: grey">(e.g. https://raw.githubusercontent.com/fusepoolP3/batchrefine/master/engines/engines-core/src/test/resources/transforms/osterie-rdfize.json)</span></div>
             </div>
             <div class="form-group">
                 <label for="transformerBase" class="col-sm-2 control-label">
                     Refine Transformer Base URI:
                 </label>
-                <div class="col-sm-10"><input type="text" id="transformerBase" name="transformerBase" size="80"/></div>
+                <div class="col-sm-10 "><input type="text" class="form-control"  id="transformerBase" name="transformerBase" size="80"/></div>
             </div>
             <div class="form-group">
-                <div class="col-sm-10"><button id="generate" value="Generate Transformer" >Generate Transformer</button></div>
+                <div class="col-sm-10 col-sm-offset-2">
+                    <button id="generate" class="btn btn-primary">
+                        <span class="glyphicon-button">Generate Transformer</span>
+                    </button>
+
+
+                </div>
             </div>            
             <div id="resultDiv">
                 <div class="form-group">
+
                     <label for="resultValue" class="col-sm-2 control-label">
                         Transformer URI:
                     </label>
-                    <div class="col-sm-10"><input id="resultValue" name="resultValue" type="text" size="120" /></div>
+                    <div class="col-sm-10"><input id="resultValue"  class="form-control" name="resultValue" type="text" size="120" /></div>
                 </div>
                 <div class="form-group">
-                    <label for="resultValue" class="col-sm-2 control-label">
-                        <button id="register">Register in transformer registry at:</button>
-                    </label>
-                    <div class="col-sm-10"><input type="text" id="transformerRegistry" size="80"/></div>
+                    <div class="col-sm-10 col-sm-offset-2">
+
+                    <!--<label for="resultValue" class="col-sm-2 control-label">-->
+                        <button id="register" class="btn btn-primary">
+                            <span class="glyphicon-button">Register </span>
+
+
+                        </button>
+                        in transformer registry at:
+                    <!--</label>-->
+</div>
+                    </div>
+
+                <div class="form-group">
+
+                    <div class="col-sm-10 col-sm-offset-2"><input type="text"  class="form-control" id="transformerRegistry" size="80"/></div>
                 </div>
                 
             </div>

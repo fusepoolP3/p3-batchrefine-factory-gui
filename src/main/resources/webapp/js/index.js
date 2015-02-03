@@ -91,7 +91,9 @@ function showMessage(elementId, message) {
 
 function showErrorMessage(elementId, response, statusLabel, fallbackMessage) {
 
-	fallbackMessage = setDefaultValue(fallbackMessage, "Something went wrong...");
+    if (typeof(fallbackMessage) == "undefined"){
+        fallbackMessage = "Something went wrong...";
+    }
 
 	if(typeof response.responseText !== 'undefined' && response.responseText.length > 0 ) {
 		showMessage(elementId, response.responseText);
