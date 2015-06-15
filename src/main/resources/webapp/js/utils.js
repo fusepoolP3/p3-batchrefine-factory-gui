@@ -1,3 +1,68 @@
+function setURIParameters(initFunc){
+	if(!extractParam("platformURI", "platformURI")) {
+		var platformURI = prompt('Please enter a valid platform URI', 'http://example.com/ldp/platform');
+		if (platformURI != null) {
+			window.platformURI = platformURI;
+		}
+		else {
+			return;
+		}
+	}
+	if(!extractParam("transformerBase", "transformerBase")) {
+		var transformerBase = prompt('Please enter a valid transformer base URI', 'http://example.com:8301/');
+		if (transformerBase != null) {
+			window.transformerBase = transformerBase;
+		}
+		else {
+			return;
+		}
+	}
+	registerConfigData(initFunc);
+}
+
+function extractParam(param, variableName) {
+	var set = getURLParameter(param);
+	if(set.length > 0) {
+		window[variableName] = set[0];
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+function registerConfigData(initFunc){
+	
+	var ajaxRequest = $.ajax({	
+                type: "GET",
+                async: false,
+		url: platformURI,
+		cache: false	});
+	
+	ajaxRequest.done(function(response, textStatus, request) {
+		var store = rdfstore.create();
+		store.load('text/turtle', response, function(success, results) {
+			if(success) {
+				
+				var query = "SELECT * { ?s <http://vocab.fusepool.info/fp3#transformerRegistry>  ?tr . }";
+				
+				store.execute(query, function(success, results) {
+					if(success) {
+						if(results.length == 0) {
+							alert("Incorrect platform configuration.");
+						}
+						else {
+							transformerRegistry = results[0].tr.value;
+							initFunc();
+						}
+					}
+				});
+			}
+		});
+	});
+	ajaxRequest.fail(function(response, textStatus, statusLabel){});	
+}
+
 function getURLParameter(paramName){
 	var result = [];
 	var sPageURL = window.location.search.substring(1);
