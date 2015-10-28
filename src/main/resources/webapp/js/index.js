@@ -9,7 +9,7 @@ $(document).ready(function () {
     resultDiv.hide();
 	
     function transformerUri() {
-        return transformerBase+"?refinejson="+encodeURIComponent($("#refineJson").val());
+        return transformerBase+"?refinejson="+encodeURIComponent($.trim($("#refineJson").val()));
     }
 	
     $('#generate').on("click", function() {
@@ -24,10 +24,10 @@ $(document).ready(function () {
             "<> a trldpc:TransformerRegistration;"+
             "    trldpc:transformer <"+transformerUri()+">;"+
             "    dct:title 'Batchrefine transformer'@en;"+
-            "    dct:description 'A Batchrefine transformer using "+$("#refineJson").val()+"'.";
+            "    dct:description 'A Batchrefine transformer using "+$.trim($("#refineJson").val())+"'.";
         //hideMessages();
         startLoading();
-        var container = $("#transformerRegistry").val();
+        var container = $.trim($("#transformerRegistry").val());
         var tentativeName = "batchrefine-transformer";
         var headerCollection = { "Slug" : tentativeName };
         function registerSuccess(response, textStatus, request) {
