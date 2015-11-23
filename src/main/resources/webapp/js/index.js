@@ -1,5 +1,4 @@
 var transformerBase;
-var transformerRegistry;
 
 $(document).ready(function () {
 	
@@ -55,8 +54,10 @@ $(document).ready(function () {
 });
 
 function fillInputs() {	
-    $("#transformerBase").val(transformerBase);
-    $("#transformerRegistry").val(transformerRegistry);
+		P3Platform.getPlatform(platformURI).then(function(p) {
+			$("#transformerBase").val(transformerBase);
+			$("#transformerRegistry").val(p.getTransformerRegistryURI());
+		});
 }
 
 function saveContent(container, data, headers, contentType, saveSuccess, saveFail) {

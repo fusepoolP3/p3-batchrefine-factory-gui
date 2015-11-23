@@ -17,7 +17,7 @@ function setURIParameters(initFunc){
 			return;
 		}
 	}
-	registerConfigData(initFunc);
+	initFunc();
 }
 
 function extractParam(param, variableName) {
@@ -29,38 +29,6 @@ function extractParam(param, variableName) {
 	else {
 		return false;
 	}
-}
-
-function registerConfigData(initFunc){
-	
-	var ajaxRequest = $.ajax({	
-                type: "GET",
-                async: false,
-		url: platformURI,
-		cache: false	});
-	
-	ajaxRequest.done(function(response, textStatus, request) {
-		var store = rdfstore.create();
-		store.load('text/turtle', response, function(success, results) {
-			if(success) {
-				
-				var query = "SELECT * { ?s <http://vocab.fusepool.info/fp3#transformerRegistry>  ?tr . }";
-				
-				store.execute(query, function(success, results) {
-					if(success) {
-						if(results.length == 0) {
-							alert("Incorrect platform configuration.");
-						}
-						else {
-							transformerRegistry = results[0].tr.value;
-							initFunc();
-						}
-					}
-				});
-			}
-		});
-	});
-	ajaxRequest.fail(function(response, textStatus, statusLabel){});	
 }
 
 function getURLParameter(paramName){
